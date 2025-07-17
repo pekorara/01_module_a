@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="width: 500px;height: 500px;border: 1px solid black">
+<canvas width="500" height="500"></canvas>
+<input type="number" name="" id="">
+<button type="button" onclick="draw()">Draw</button>
+
+<script>
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  function draw(){
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    const value = +document.querySelector('input').value;
+    recursive(canvas.width/2,20,500,450,value)
+  }
+
+  function recursive(x,y,size,height,depth){
+    if (depth === 0){
+      print(x,y,size,height);
+    }else {
+      const newSize = size / 2;
+        const newHeight = height / 2;
+        // 頂點
+        recursive(x, y, newSize, newHeight, depth - 1);
+
+        // 左下角
+        recursive(x - newSize / 2, y + newHeight, newSize, newHeight, depth - 1);
+
+        // 右下角
+        recursive(x + newSize / 2, y + newHeight, newSize, newHeight, depth - 1);
+
+      // recursive(x ,y,newSize,depth-1);
+      // recursive(x + newSize / 2 ,y + newSize * Math.sqrt(3) / 2,newSize,depth-1);
+      // recursive(x - newSize / 2 ,y + newSize * Math.sqrt(3) / 2,newSize,depth-1);
+    }
+  }
+
+  function print(x, y, newSize, height) {
+      ctx.beginPath();
+      ctx.fillStyle = 'black';
+      ctx.moveTo(x, y); // 頂點（上方）
+
+      // 左下角
+      ctx.lineTo(x - newSize / 2, y + height);
+
+      // 右下角
+      ctx.lineTo(x + newSize / 2, y + height);
+
+      ctx.closePath();
+      ctx.fill();
+  }
+
+  // function print(x,y,newSize){
+  //   ctx.beginPath();
+  //   ctx.fillStyle = 'black';
+  //   ctx.moveTo(x,y);
+  //   ctx.lineTo(x - newSize / 2 ,y + newSize * Math.sqrt(3) / 2);
+  //   ctx.lineTo(x + newSize / 2 ,y + newSize * Math.sqrt(3) / 2);
+  //   ctx.closePath();
+  //   ctx.fill();
+  // }
+</script>
+</body>
+</html>

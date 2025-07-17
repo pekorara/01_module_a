@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../plugin/theme.css">
+    <style>
+        .color-btn{
+            background: black;
+            width: 40px;
+            height: 40px;
+            border: none;
+        }
+
+        .dot{
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 100%;
+            top: 100%;
+            transform: translate(-50%,-50%);
+            background: white;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="p-2" style="background: #e1e1e1">
+<div class="d-flex flex-row gap-2">
+    <button type="button" class="color-btn" style="background: black" onclick="setColor('black')"></button>
+    <button type="button" class="color-btn" style="background: red" onclick="setColor('red')"></button>
+    <button type="button" class="color-btn" style="background: blue" onclick="setColor('blue')"></button>
+    <button type="button" class="color-btn" style="background: yellow" onclick="setColor('yellow')"></button>
+    <button type="button" class="color-btn" style="background: green" onclick="setColor('green')"></button>
+</div>
+<br>
+<div style="display: inline-block" class="position-relative">
+    <canvas width="300" height="300"></canvas>
+    <button type="button" class="dot"></button>
+</div>
+<br>
+<div class="d-flex flex-row gap-2">
+    <button type="button" onclick="save('jpg')">儲存為JPG</button>
+    <button type="button" onclick="save('png')">儲存為PNG</button>
+</div>
+<script>
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    function setColor(color){
+        ctx.strokeStyle = color;
+    }
+
+    let startX=0;
+    let startY=0;
+    let isDraw = false;
+    canvas.addEventListener('mousedown',e => {
+        isDraw = true;
+        startX = e.offsetX;
+        startY = e.offsetY;
+        ctx.beginPath();
+        ctx.moveTo(startX,startY);
+    })
+
+    canvas.addEventListener("mousemove", e => {
+        if (!isDraw) return;
+        ctx.lineTo(e.offsetX,e.offsetY);
+        ctx.stroke();
+        ctx.moveTo(e.offsetX,e.offsetY);
+    })
+
+    document.addEventListener('mouseup',e => {
+        isDraw = false;
+    })
+
+    canvas.addEventListener('mouseleave',e => {
+        isDraw = false;
+    })
+
+    const dot = document.querySelector('.dot');
+    let width = 0;
+    let height = 0;
+    let sX = 0;
+    let sY = 0;
+    let isDrag = false;
+    let image = null;
+    dot.addEventListener('mousedown',e => {
+        isDrag = true;
+        width = canvas.width;
+        height = canvas.height;
+        sX = e.clientX;
+        sY = e.clientY;
+        image = ctx.getImageData(0,0,canvas.width,canvas.height);
+    })
+
+    document.addEventListener('mousemove',e => {
+        if (!isDrag) return;
+        const newW = width + (e.clientX - sX);
+        const newH = height + (e.clientY - sY);
+        canvas.width = newW;
+        canvas.height = newH;
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.putImageData(image,0,0);
+    })
+
+    document.addEventListener('mouseup',e => {
+        isDrag= false;
+    })
+
+    function save(type){
+        const a = document.createElement('a');
+        if (type === 'jpg'){
+            a.download = 'image.jpg';
+        }else {
+            a.download = 'image.png';
+        }
+        a.href = canvas.toDataURL();
+        a.click();
+    }
+</script>
+</body>
+</html>

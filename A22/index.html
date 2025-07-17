@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../plugin/theme.css">
+    <style>
+        .bar{
+            width: 70px;
+            height: 0;
+            background: black;
+        }
+
+        .bar:nth-of-type(1){
+            background: #fc5b5c;
+            transition: all 1.5s ease;
+        }
+
+        .bar:nth-of-type(2){
+            background: #81fd59;
+            transition: all 1.5s ease;
+            transition-delay:.5s;
+        }
+
+        .bar:nth-of-type(3){
+            background: #758ffc;
+            transition: all 1.5s ease;
+            transition-delay: 1s;
+
+        }
+
+        .box:hover .bar:nth-of-type(1){
+            height: 100%;
+        }
+
+        .box:hover .bar:nth-of-type(2){
+            height: 30%;
+        }
+
+        .box:hover .bar:nth-of-type(3){
+            height: 60%;
+        }
+
+    </style>
+</head>
+<body style="height: 100vh">
+<div class="position-relative p-2 box d-flex justify-content-around flex-row align-items-end" style="width: 700px;height: 700px;left: 50%;top: 50%;transform: translate(-50%,-50%);border: 1px solid black">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+</body>
+</html>

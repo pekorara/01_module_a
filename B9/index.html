@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Image Compare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="width: 600px;height: 400px" onload="
+const container = document.querySelector('div');
+let isFlag = false;
+container.addEventListener('mousedown',e => isFlag = true);
+container.addEventListener('mousemove',e => {
+    if (!isFlag) return;
+    const rect = container.getBoundingClientRect();
+    const x = e.offsetX / rect.width * 100;
+    document.documentElement.style.setProperty('--x',`${x}%`);
+});
+document.addEventListener('mouseup',e => isFlag = false);
+container.addEventListener('click',e =>{
+        const rect = container.getBoundingClientRect();
+    const x = e.offsetX / rect.width * 100;
+    document.documentElement.style.setProperty('--x',`${x}%`);
+});
+">
+    <div>
+        <input type="text" style="display: none">
+        <img src="before.jpg" style="user-select: none">
+        <img src="after.jpg" style="clip-path: inset(0 0 0 var(--x));user-select: none">
+    </div>
+</body>
+</html>
+

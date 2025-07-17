@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            padding: 2rem;
+            background: black;
+        }
+
+        ul{
+            background: black;
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            filter: contrast(26);
+        }
+
+        li{
+            width: 400px;
+            filter: blur(8px);
+            height: 48px;
+            background: white;
+            border-radius: 20px;
+        }
+
+        li:nth-of-type(2){
+            border-radius: 50%;
+            width: 50px;
+            left: 50%;
+            top: 5%;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            height: 50px;
+            animation: rrr 2s ease-in infinite;
+        }
+
+        @keyframes rrr {
+            to{
+                top: 100%;
+            }
+        }
+    </style>
+</head>
+<body >
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>

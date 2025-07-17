@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<input type="file" name="" id="" webkitdirectory>
+<button type="button" onclick="compress()">Compress</button>
+
+<script>
+    function compress(){
+        const files = document.querySelector('input').files;
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files[]',files[i]);
+            formData.append('paths[]',files[i].webkitRelativePath);
+        }
+        const folder = files[0].webkitRelativePath.split('/')[0];
+        fetch(`back.php?folder=${folder}`,{
+            method : "POST",
+            body : formData
+        }).then(z => z.text()).then(z => {
+            location.href = z;
+        })
+    }
+</script>
+</body>
+</html>

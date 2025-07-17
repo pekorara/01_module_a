@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heavy HTML Page</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: #f4f4f4;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .images img {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+        }
+
+        .videos iframe, .videos video {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 10px;
+            object-fit: cover;
+        }
+
+        .content {
+            margin: 20px 0;
+        }
+
+        .form-section {
+            margin: 20px 0;
+        }
+
+        /* YOUR CODE HERE */
+        .loading-container{
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: flex;
+            background: #d1d1d1;
+            z-index: 111;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            transform: translate(-50%,-50%);
+        }
+        svg{
+            animation: ro 2s linear infinite;
+        }
+
+        @keyframes ro {
+            to{
+                transform: rotate(360deg);
+            }
+        }
+
+        circle{
+            fill: none;
+            stroke-width: 6px;
+            stroke-dasharray: 253.1;
+            stroke-dashoffset: 253.1;
+            stroke-linecap: round;
+            stroke: #0100fd;
+            animation: rrr 2s ease-in-out infinite;
+        }
+
+        @keyframes rrr {
+            to{
+                stroke-dashoffset: -253.1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Heavy HTML Page</h1>
+</header>
+
+<div class="container">
+    <div class="loading-container">
+        <!-- YOUR CODE HERE -->
+        <svg width="88" height="88">
+            <circle r="40" cx="44" cy="44"></circle>
+        </svg>
+    </div>
+    <section class="content">
+        <h2>Large Text Content</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.
+            Cras venenatis euismod malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia
+            odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.
+            Cras venenatis euismod malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia
+            odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+    </section>
+
+    <section class="images">
+        <h2>Images</h2>
+        <img src="assets/300.png" alt="Placeholder Image 1">
+        <img src="assets/600.png" alt="Placeholder Image 2">
+        <img src="assets/900.png" alt="Placeholder Image 3">
+    </section>
+
+    <section class="videos">
+        <h2>Videos</h2>
+        <video src="assets/Bohemian%20Rhapsody%20_%20Muppet%20Music%20Video%20_%20The%20Muppets.mp4" controls
+               loop></video>
+        <video src="assets/Rick%20Astley%20-%20Never%20Gonna%20Give%20You%20Up%20(Official%20Music%20Video).mp4"
+               controls loop></video>
+    </section>
+
+    <section class="form-section">
+        <h2>Interactive Forms</h2>
+        <form>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    <section class="dynamic-content">
+        <h2>Dynamic Content</h2>
+        <button id="dynamicContentBtn">Add Dynamic Content</button>
+        <div id="dynamicContent"></div>
+    </section>
+</div>
+
+<footer>
+    <p>Footer Content Here</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("dynamicContentBtn").addEventListener("click", function () {
+            document.getElementById("dynamicContent").innerHTML = "This is dynamically added content!";
+        });
+    });
+
+    /* YOUR CODE HERE */
+    document.querySelector('body').style.overflow ='hidden';
+    window.onload = e => {
+        document.querySelector('body').style.overflow ='auto';
+        document.querySelector('.loading-container').remove();
+    }
+</script>
+</body>
+</html>
